@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
 public class UDPServer {
 
     public static void main(String[] args) throws IOException {
-        int port = Integer.parseInt(args[1]);
+        int port = 2345;
         DatagramSocket sock = new DatagramSocket(port);
         while(true){
             byte[] rcvData = new byte[1024];
