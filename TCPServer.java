@@ -1,21 +1,25 @@
-import java.net.*;
 import java.io.*;
-
-import static java.lang.System.in;
-
+import java.net.*;
 public class TCPServer {
-
-
-        public static void main(String[] args) throws IOException {
-            ServerSocket welcomeSocket = new ServerSocket(2345);
-            while(true) {
-
-                Socket connectionSocket = welcomeSocket.accept();
-                DataInputStream dataIn = new DataInputStream(connectionSocket.getInputStream());
-                int i = dataIn.readInt();
-                System.out.println(i);
-                connectionSocket.close();
+    public static void main(String[] argv) throws Exception
+    {
+        ServerSocket welcomeSocket = new ServerSocket(6789);
+        int alt = -1;
+        while(true) {
+            Socket connectSocket = welcomeSocket.accept();
+            DataInputStream inFromClient =
+                    new DataInputStream(connectSocket.getInputStream());
+            int i = inFromClient.readInt();
+            if(alt  == -1) {
+                alt = i;
+            } else {
+                if(i != alt + 1) {
+                    System.err.println("Die Zahlenfolge ist nicht fortlaufend!!! (vorletzte Zahl: " + alt +
+                            " letzte Zahl: " + i + ")");
+                }
+                alt = i;
             }
+            connectSocket.close();
         }
-
+    }
 }
