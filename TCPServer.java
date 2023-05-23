@@ -7,7 +7,6 @@ public class TCPServer {
 
 
         public static void main(String[] args) throws IOException {
-            String sentence;
             ServerSocket welcomeSocket = new ServerSocket(2345);
             while(true) {
 
