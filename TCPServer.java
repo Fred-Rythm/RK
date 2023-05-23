@@ -11,9 +11,10 @@ public class TCPServer {
             while(true) {
 
                 Socket connectionSocket = welcomeSocket.accept();
-                DataInputStream dataIn = new DataInputStream(in);
+                DataInputStream dataIn = new DataInputStream(connectionSocket.getInputStream());
                 int i = dataIn.readInt();
                 System.out.println(i);
+                connectionSocket.close();
             }
         }
 
