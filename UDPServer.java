@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.nio.ByteBuffer;
@@ -9,9 +10,12 @@ public class UDPServer {
         int port = Integer.parseInt(args[1]);
         DatagramSocket sock = new DatagramSocket(port);
         while(true){
-            byte[] data = ByteBuffer.allocate(8).putInt(
+            byte[] rcvData = new byte[1024];
+            DatagramPacket rcvPkt = new DatagramPacket(rcvData,rcvData.length);
+            sock.receive(rcvPkt);
+           int i = ByteBuffer.wrap(rcvPkt.getData(),0,rcvPkt.getLength()).getInt();
+           System.out.println(i);
 
-            )
         }
 
 
