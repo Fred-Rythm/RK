@@ -7,14 +7,14 @@ public class UDPClient {
 
     public static void main(String[] args) throws IOException {
 
-        //String ipAddress = "127.0.0.0";
-        final int port = 2345;
-        byte[]sendData = new byte[1024];
+        String ipAddress = args[0];
+        final int port = Integer.parseInt(args[1]);
+        byte[]sendData;
         DatagramSocket sock = new DatagramSocket(port);
         for(int i = 0; i <=100000;i++)
         {
             sendData = ByteBuffer.allocate(4).putInt(i).array();
-            DatagramPacket sendPkt = new DatagramPacket(sendData,sendData.length, InetAddress.getByName("localhost"),port);
+            DatagramPacket sendPkt = new DatagramPacket(sendData,sendData.length, InetAddress.getByName(ipAddress),port);
             sock.send(sendPkt);
         }
     }

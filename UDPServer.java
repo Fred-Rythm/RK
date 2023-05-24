@@ -7,7 +7,7 @@ public class UDPServer {
     public static void main(String[] args) throws IOException {
         int prevNumber;
         int number = 0;
-        DatagramSocket sock = new DatagramSocket(2345);
+        DatagramSocket sock = new DatagramSocket(Integer.parseInt(args[0]));
         while(true){
             byte[] rcvData = new byte[1024];
             try{

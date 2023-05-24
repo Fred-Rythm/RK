@@ -3,7 +3,7 @@ import java.net.*;
 public class TCPServer {
     public static void main(String[] argv) throws Exception
     {
-        ServerSocket welcomeSocket = new ServerSocket(2345);
+        ServerSocket welcomeSocket = new ServerSocket(Integer.parseInt(argv[0]));
         int alt = -1;
         while(true) {
             Socket connectSocket = welcomeSocket.accept();
