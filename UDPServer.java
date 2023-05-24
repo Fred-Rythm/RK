@@ -5,8 +5,7 @@ import java.nio.*;
 public class UDPServer {
 
     public static void main(String[] args) throws IOException {
-        int port = 2345;
-        int prevNumber = 0;
+        int prevNumber;
         int number = 0;
         DatagramSocket sock = new DatagramSocket(2345);
         while(true){
