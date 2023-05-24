@@ -1,8 +1,5 @@
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.io.*;
+import java.net.*;
 import java.nio.ByteBuffer;
 
 public class UDPClient {
@@ -10,15 +7,15 @@ public class UDPClient {
 
     public static void main(String[] args) throws IOException {
 
-        String ipAddress = "127.0.0.1";
+        //String ipAddress = "127.0.0.0";
         int port = 2345;
         byte[]sendData = new byte[1024];
-        DatagramSocket sock = new DatagramSocket(port);
-        for(int i = 0; i <=1000000;i++)
+        DatagramSocket sock = new DatagramSocket(2346);
+        for(int i = 0; i <=100000;i++)
         {
-
-            sendData = ByteBuffer.allocate(8).putInt(i).array();
-            DatagramPacket sendPkt = new DatagramPacket(sendData,sendData.length, InetAddress.getByName(ipAddress),port);
+            //Integer theoretisch nur 4 byte, allerdings soregen 8byte für viel weniger Verluste
+            sendData = ByteBuffer.allocate(4).putInt(i).array();
+            DatagramPacket sendPkt = new DatagramPacket(sendData,sendData.length, InetAddress.getByName("localhost"),port);
             sock.send(sendPkt);
         }
     }
