@@ -1,5 +1,3 @@
-import java.io.*;
-import java.net.*;
 /*
 * 1. TCP macht keine Fehler bzw. bei UDP ist die Fehlerrate viel höher, da Absender keine Empfangsbestätigung bekommt -> Daten gehen bei Übertragung durch Bitfehler usw verloren.
 * 2.1 java.net.BindException (mehrere Server hören auf dem gleichen Port; für wen sind eingehende Pakete gemeint?)
@@ -8,15 +6,21 @@ import java.net.*;
 * 3 Die Fehlerrate wird viel geringer
 *   höhere Übertragungsrate kann zu einer Netzüberlastung kommen -> wie auf Autobahn: zu viele Autos -> Stau. Durch langsameres senden sinkt Fehlerrate.
 * */
-class TCPClient {
-    public static void main(String[] argv) throws Exception {
+import java.io.*;
+import java.net.*;
 
-        for (int i = 0; i <= 1000000; i++) {
-            Socket clientSocket = new Socket(argv[0], Integer.parseInt(argv[1]));
-            DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-            outToServer.writeInt(i);
-            outToServer.flush();
-            clientSocket.close();
+public class TCPClient {
+
+    public static void main(String args[]) throws Exception {
+        Socket clientSocket = new Socket("localhost", 2345);
+        OutputStream out = clientSocket.getOutputStream();
+        DataOutputStream dataOut = new DataOutputStream(out);
+        for(int i = 0; i<=1000000;i++) {
+            dataOut.writeInt(i);
+            System.out.println("Sending: " + i);
         }
+        dataOut.close();
+        clientSocket.close();
     }
 }
+
