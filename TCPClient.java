@@ -12,7 +12,7 @@ import java.net.*;
 public class TCPClient {
 
     public static void main(String args[]) throws Exception {
-        Socket clientSocket = new Socket("localhost", 2345);
+        Socket clientSocket = new Socket(args[0], Integer.parseInt(args[1]));
         OutputStream out = clientSocket.getOutputStream();
         DataOutputStream dataOut = new DataOutputStream(out);
         for(int i = 0; i<=1000000;i++) {

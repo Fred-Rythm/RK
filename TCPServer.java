@@ -4,7 +4,7 @@ import java.net.*;
 public class TCPServer {
 
     public static void main (String args[]) throws Exception {
-        int port =2345;
+        int port =Integer.parseInt(args[0]);
         int number = 0;
         int prevNumber;
 
