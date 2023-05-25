@@ -23,7 +23,7 @@ public class TCPServer {
                         System.out.println("Error! Number: " + number + "  previous Number: " + prevNumber);
                     }
                 }
-            }catch(Exception e){}
+            }catch(EOFException e){}
             connectSocket.close();
         }
     }

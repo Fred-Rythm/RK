@@ -11,7 +11,6 @@ public class UDPServer {
         DatagramSocket sock = new DatagramSocket(2345);
         while(true){
             byte[] rcvData = new byte[1024];
-            try{
                 while(true) {
                     DatagramPacket rcvPkt = new DatagramPacket(rcvData,rcvData.length);
                     sock.receive(rcvPkt);
@@ -22,7 +21,6 @@ public class UDPServer {
                         System.out.println("Error! Number: " + number + "  previous Number: " + prevNumber);
                     }
                 }
-            }catch(Exception e){}
         }
     }
 }
