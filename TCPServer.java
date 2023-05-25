@@ -1,22 +1,29 @@
 import java.io.*;
 import java.net.*;
+
 public class TCPServer {
-    public static void main(String[] argv) throws Exception
-    {
-        ServerSocket welcomeSocket = new ServerSocket(Integer.parseInt(argv[0]));
-        int alt = -1;
-        while(true) {
+
+    public static void main (String args[]) throws Exception {
+        int port =2345;
+        int number = 0;
+        int prevNumber;
+
+        ServerSocket welcomeSocket = new ServerSocket(port);
+        while(true){
+            System.out.println("Waiting for client request");
             Socket connectSocket = welcomeSocket.accept();
-            DataInputStream inFromClient =
-                    new DataInputStream(connectSocket.getInputStream());
-            int i = inFromClient.readInt();
-            if (alt != -1) {
-                if (i != alt + 1) {
-                    System.err.println("Die Zahlenfolge ist nicht fortlaufend!!! (vorletzte Zahl: " + alt +
-                            " letzte Zahl: " + i + ")");
+            InputStream in = connectSocket.getInputStream();
+            DataInputStream dataIn = new DataInputStream(in);
+            try{
+                while(true){
+                    prevNumber = number;
+                    number = dataIn.readInt();
+                    //System.out.println(number);
+                    if(number > 0 && number != prevNumber+1){
+                        System.out.println("Error! Number: " + number + "  previous Number: " + prevNumber);
+                    }
                 }
-            }
-            alt = i;
+            }catch(Exception e){}
             connectSocket.close();
         }
     }
