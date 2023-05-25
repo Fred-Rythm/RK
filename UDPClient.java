@@ -9,7 +9,7 @@ public class UDPClient {
 
         //String ipAddress = "127.0.0.0";
         int port = Integer.parseInt(args[1]);
-        byte[]sendData = new byte[1024];
+        byte[]sendData;
         DatagramSocket sock = new DatagramSocket(2346);
         for(int i = 0; i <=100000;i++)
         {
