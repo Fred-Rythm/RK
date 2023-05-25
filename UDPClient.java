@@ -18,5 +18,6 @@ public class UDPClient {
             DatagramPacket sendPkt = new DatagramPacket(sendData,sendData.length, InetAddress.getByName("localhost"),port);
             sock.send(sendPkt);
         }
+        sock.close();
     }
 }
